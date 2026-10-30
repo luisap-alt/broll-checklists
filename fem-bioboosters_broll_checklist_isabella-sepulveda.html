@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FEM + BIO BOOSTERS · Tomas de Apoyo · Isabella Sepúlveda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<script>
+  // Tema antes del primer paint para que no haya destello
+  (function () {
+    try {
+      var t = localStorage.getItem('broll_fem_521_525_bioboosters_106_110_v1_theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* ===== Identidad Social Ecom Agency =====
+     Menta  #02FEBF   Azul  #084AF3
+     Negro  #101218   Gris claro  #F3F5F5
+     Poppins (títulos) + Open Sans (texto)                        */
+  :root {
+    --bg: #0B0D11;
+    --hero-glow: radial-gradient(105% 165% at 50% -25%, rgba(2,254,191,0.40) 0%, rgba(2,254,191,0.13) 34%, rgba(11,13,17,0) 68%);
+    --card: #14171D;
+    --card-2: #1B1F27;
+    --text: #ffffff;
+    --muted: rgba(255,255,255,0.62);
+    --accent: #02FEBF;
+    --accent-solid: #02FEBF;
+    --accent-ink: #04231C;
+    --blue: #084AF3;
+    --border: rgba(255,255,255,0.09);
+    --border-strong: rgba(255,255,255,0.22);
+    --danger: #FCA5A5;
+    --danger-bg: rgba(248,113,113,0.14);
+    --tof: #7DD3FC;
+    --tof-bg: rgba(56,189,248,0.14);
+    --mof: #FCD34D;
+    --mof-bg: rgba(251,191,36,0.14);
+    --bof: #FCA5A5;
+    --bof-bg: rgba(248,113,113,0.15);
+    --broll-bg: rgba(2,254,191,0.07);
+    --broll-ink: #02FEBF;
+    --cat-neg: #FCA5A5;  --cat-neg-bg: rgba(248,113,113,0.16);
+    --cat-pos: #02FEBF;  --cat-pos-bg: rgba(2,254,191,0.14);
+    --cat-prod: #9DBBFF; --cat-prod-bg: rgba(8,74,243,0.26);
+    --cat-neu: rgba(255,255,255,0.74); --cat-neu-bg: rgba(255,255,255,0.09);
+    --shadow: 0 1px 2px rgba(0,0,0,0.4);
+    --hero-text: #ffffff;
+  }
+  :root[data-theme="light"] {
+    --bg: #F3F5F5;
+    --hero-glow: radial-gradient(120% 150% at 50% -20%, rgba(2,254,191,0.30) 0%, rgba(2,254,191,0.08) 40%, rgba(243,245,245,0) 72%);
+    --card: #ffffff;
+    --card-2: #EAEEEE;
+    --text: #101218;
+    --muted: #494B51;
+    --accent: #00806A;
+    --accent-solid: #02FEBF;
+    --accent-ink: #04231C;
+    --blue: #084AF3;
+    --border: #DCE1E1;
+    --border-strong: #B9C1C1;
+    --danger: #B91C1C;
+    --danger-bg: #FEE2E2;
+    --tof: #1d4ed8;
+    --tof-bg: #dbeafe;
+    --mof: #92590a;
+    --mof-bg: #fef3c7;
+    --bof: #b91c1c;
+    --bof-bg: #fee2e2;
+    --broll-bg: rgba(2,254,191,0.16);
+    --broll-ink: #00806A;
+    --cat-neg: #b91c1c;  --cat-neg-bg: #fee2e2;
+    --cat-pos: #00806A;  --cat-pos-bg: rgba(2,254,191,0.24);
+    --cat-prod: #1d4ed8; --cat-prod-bg: #dbeafe;
+    --cat-neu: #494B51;  --cat-neu-bg: #EAEEEE;
+    --shadow: 0 1px 2px rgba(16,18,24,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, .reel-num, .progress-text, .chip, .ref-btn, .tag, .creator-title h2 {
+    font-family: Poppins, "Open Sans", -apple-system, system-ui, sans-serif;
+  }
+
+  /* ===== Hero de marca ===== */
+  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+  .hero::before { content: ""; position: absolute; inset: 0; background: var(--hero-glow); pointer-events: none; }
+  .hero-inner { position: relative; max-width: 1000px; margin: 0 auto; padding: 34px 20px 30px; text-align: center; }
+  .logo { width: 52px; height: 52px; margin: 0 auto 14px; display: block; }
+  h1 { font-size: 27px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.02em; line-height: 1.22; color: var(--text); }
+  h1 .accent { color: var(--accent-solid); }
+  .sub { color: var(--muted); font-size: 14px; margin: 0; }
+  .theme-btn {
+    position: absolute; top: 18px; right: 20px; width: 38px; height: 38px; border-radius: 100px;
+    background: var(--card); border: 1px solid var(--border); color: var(--text);
+    cursor: pointer; font-size: 15px; line-height: 1; display: flex; align-items: center;
+    justify-content: center; transition: all .15s; z-index: 2;
+  }
+  .theme-btn:hover { border-color: var(--accent-solid); color: var(--accent); }
+
+  /* ===== Barra sticky de progreso + filtros ===== */
+  .bar { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--border); }
+  .bar-inner { max-width: 1000px; margin: 0 auto; padding: 12px 20px; }
+  .progress-wrap { display: flex; align-items: center; gap: 14px; }
+  .progress-bar { flex: 1; height: 8px; background: var(--card-2); border-radius: 100px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; border-radius: 100px; background: linear-gradient(90deg, var(--blue), var(--accent-solid)); transition: width .35s ease; }
+  .progress-text { font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; }
+  .toolbar { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
+  .chip {
+    background: var(--card); border: 1px solid var(--border); color: var(--text);
+    padding: 5px 13px; border-radius: 100px; font-size: 12.5px; font-weight: 500;
+    cursor: pointer; transition: all .15s; user-select: none;
+  }
+  .chip:hover { border-color: var(--border-strong); }
+  .chip.active { background: var(--accent-solid); color: var(--accent-ink); border-color: var(--accent-solid); font-weight: 600; }
+  .reset-btn {
+    margin-left: auto; background: transparent; color: var(--muted); border: 1px solid var(--border);
+    padding: 5px 13px; border-radius: 100px; font-size: 12.5px; cursor: pointer; font-weight: 500;
+    font-family: Poppins, "Open Sans", sans-serif;
+  }
+  .reset-btn:hover { color: var(--danger); border-color: var(--danger); background: var(--danger-bg); }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 4px 20px 80px; }
+
+  /* ===== Bloques por creador ===== */
+  .creator-block { margin-top: 34px; }
+  .creator-title { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; padding-bottom: 9px; border-bottom: 1px solid var(--border); }
+  .creator-title h2 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); }
+  .creator-title h2::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 2px; background: var(--accent-solid); margin-right: 10px; vertical-align: 2px; }
+  .creator-title .count { color: var(--muted); font-size: 13px; }
+
+  /* ===== Card de reel ===== */
+  .reel { background: var(--card); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 11px; overflow: hidden; transition: border-color .2s; box-shadow: var(--shadow); }
+  .reel:hover { border-color: var(--border-strong); }
+  .reel.open { border-color: var(--accent-solid); }
+  .reel.hidden { display: none; }
+  /* Brief marcado como grabado: se apaga y se tacha, PERO se queda en su posición.
+     El apagado va por elemento (no opacity en la card) para que el switch siga legible. */
+  .reel.recorded { border-color: var(--border); box-shadow: none; background: var(--card-2); }
+  .reel.recorded .reel-num, .reel.recorded .reel-title,
+  .reel.recorded .tag, .reel.recorded .ref-btn, .reel.recorded .caret,
+  .reel.recorded .reel-progress { opacity: 0.42; transition: opacity .25s ease; }
+  .reel.recorded:hover .reel-num, .reel.recorded:hover .reel-title,
+  .reel.recorded:hover .tag, .reel.recorded:hover .ref-btn,
+  .reel.recorded:hover .caret, .reel.recorded:hover .reel-progress { opacity: 0.8; }
+  .reel.recorded .reel-num, .reel.recorded .reel-title { text-decoration: line-through; text-decoration-thickness: 1px; }
+  .reel-head { display: flex; align-items: center; gap: 14px; padding: 15px 18px; cursor: pointer; user-select: none; }
+  .reel-num { font-size: 13px; font-weight: 700; color: var(--accent); min-width: 68px; letter-spacing: 0.02em; }
+  .reel-title { flex: 1; font-size: 14.5px; color: var(--text); line-height: 1.4; }
+  .reel-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .tag { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; background: var(--card-2); color: var(--muted); border: 1px solid transparent; white-space: nowrap; }
+  .tag.tof { background: var(--tof-bg); color: var(--tof); }
+  .tag.mof { background: var(--mof-bg); color: var(--mof); }
+  .tag.bof { background: var(--bof-bg); color: var(--bof); }
+  .reel-progress { font-variant-numeric: tabular-nums; font-size: 12.5px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .reel-progress.done { color: var(--accent-ink); background: var(--accent-solid); padding: 2px 9px; border-radius: 100px; }
+  .caret { color: var(--muted); transition: transform .2s; font-size: 18px; }
+  .reel.open .caret { transform: rotate(90deg); }
+
+  .reel-body { display: none; padding: 4px 18px 16px; border-top: 1px solid var(--border); background: var(--card-2); }
+  .reel.open .reel-body { display: block; }
+
+  /* ===== Tomas ===== */
+  .shot { display: flex; align-items: flex-start; gap: 13px; padding: 12px 4px; border-bottom: 1px solid var(--border); cursor: pointer; }
+  .shot:last-of-type { border-bottom: none; }
+  .shot:hover .checkbox { border-color: var(--accent-solid); }
+  .checkbox { flex-shrink: 0; width: 22px; height: 22px; border: 2px solid var(--border-strong); border-radius: 7px; display: flex; align-items: center; justify-content: center; margin-top: 1px; transition: all .15s; background: var(--card); }
+  .shot.checked .checkbox { background: var(--accent-solid); border-color: var(--accent-solid); }
+  .checkbox svg { opacity: 0; transition: opacity .15s; }
+  .checkbox svg polyline { stroke: var(--accent-ink); }
+  .shot.checked .checkbox svg { opacity: 1; }
+  .shot-text { font-size: 14.5px; line-height: 1.55; flex: 1; color: var(--text); }
+  .shot-text strong { color: var(--text); font-weight: 700; }
+  .shot-tag { display: inline-block; margin-right: 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; background: var(--broll-bg); color: var(--broll-ink); vertical-align: 1px; font-family: Poppins, sans-serif; }
+  .shot.checked .shot-text { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .shot.checked .shot-text strong { color: var(--muted); }
+  .shot-tag.cat-negativa { background: var(--cat-neg-bg); color: var(--cat-neg); }
+  .shot-tag.cat-positiva { background: var(--cat-pos-bg); color: var(--cat-pos); }
+  .shot-tag.cat-producto { background: var(--cat-prod-bg); color: var(--cat-prod); }
+  .shot-tag.cat-neutra   { background: var(--cat-neu-bg); color: var(--cat-neu); }
+  .shot.checked .shot-tag { background: var(--card-2); color: var(--muted); }
+
+  /* ===== Botones del header del reel ===== */
+  .ref-btn {
+    display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600;
+    text-decoration: none; padding: 4px 11px; border-radius: 100px; white-space: nowrap;
+    cursor: pointer; transition: all .15s; letter-spacing: 0.02em;
+    background: transparent; color: var(--text); border: 1px solid var(--border-strong);
+  }
+  .ref-btn:hover { border-color: var(--accent-solid); color: var(--accent); }
+  .guion-btn { background: var(--accent-solid); color: var(--accent-ink); border-color: var(--accent-solid); }
+  .guion-btn:hover { background: #00e0a8; border-color: #00e0a8; color: var(--accent-ink); }
+  .asana-btn { border-color: #f06a6a; color: #f06a6a; }
+  .asana-btn:hover { background: #f06a6a; border-color: #f06a6a; color: #fff; }
+  /* Switch estilo iOS: da el brief completo por grabado */
+  .rec-switch {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    background: transparent; border: none; padding: 4px 2px 4px 6px; margin: 0;
+    font-family: Poppins, "Open Sans", sans-serif; -webkit-tap-highlight-color: transparent;
+  }
+  .rec-switch-txt {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+    color: var(--muted); transition: color .18s ease; white-space: nowrap;
+  }
+  .rec-track {
+    position: relative; width: 42px; height: 25px; border-radius: 100px; flex-shrink: 0;
+    background: var(--card-2); border: 1px solid var(--border-strong);
+    transition: background .22s ease, border-color .22s ease;
+  }
+  .rec-knob {
+    position: absolute; top: 50%; left: 2px; width: 19px; height: 19px; border-radius: 50%;
+    background: #fff; transform: translateY(-50%);
+    box-shadow: 0 1px 3px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.04);
+    transition: transform .24s cubic-bezier(.4,.15,.25,1.2);
+  }
+  .rec-switch:hover .rec-track { border-color: var(--accent-solid); }
+  .rec-switch:focus-visible { outline: 2px solid var(--accent-solid); outline-offset: 3px; border-radius: 100px; }
+  .reel.recorded .rec-switch-txt { color: var(--accent); }
+  .reel.recorded .rec-track { background: var(--accent-solid); border-color: var(--accent-solid); }
+  .reel.recorded .rec-knob { transform: translateY(-50%) translateX(17px); }
+  .briefs-text { font-variant-numeric: tabular-nums; font-size: 12.5px; font-weight: 600; color: var(--muted); white-space: nowrap; margin-left: auto; }
+  .briefs-text b { color: var(--accent); }
+
+  /* ===== Modal de guión ===== */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(5,7,10,0.72); backdrop-filter: blur(5px); z-index: 100; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow-y: auto; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--card); border: 1px solid var(--border); border-radius: 16px; max-width: 1120px; width: 100%; box-shadow: 0 24px 70px rgba(0,0,0,0.5); overflow: hidden; }
+  .modal-head { padding: 18px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .modal-head h3 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); font-family: Poppins, sans-serif; }
+  .modal-head .modal-sub { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+  .modal-close { background: var(--card-2); border: 1px solid var(--border); width: 32px; height: 32px; border-radius: 9px; cursor: pointer; font-size: 17px; color: var(--text); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .modal-close:hover { background: var(--danger-bg); border-color: var(--danger); color: var(--danger); }
+  .modal-body { padding: 8px 20px 20px; max-height: 72vh; overflow-y: auto; }
+
+  /* Tabla de guión — réplica de la tabla de Asana */
+  .guion-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 11px; }
+  .guion-table { width: 100%; min-width: 860px; border-collapse: collapse; font-size: 13px; }
+  .guion-table th { text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); background: var(--card-2); padding: 10px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; position: sticky; top: 0; z-index: 1; font-family: Poppins, sans-serif; }
+  .guion-table td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--text); }
+  .guion-table tr:last-child td { border-bottom: none; }
+  .guion-table td.g-est { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); white-space: nowrap; font-family: Poppins, sans-serif; }
+  .guion-table td.g-texto { font-size: 13.5px; }
+  .guion-table th:nth-child(1), .guion-table td:nth-child(1) { width: 104px; }
+  .guion-table th:nth-child(2) { width: 32%; }
+  .guion-table th:nth-child(3), .guion-table td:nth-child(3) { width: 118px; }
+  .guion-table th:nth-child(4) { width: 26%; }
+  .guion-table th:nth-child(5) { width: 22%; }
+  .guion-table tr.is-broll { background: var(--broll-bg); }
+  .guion-table tr.is-broll td.g-est { color: var(--broll-ink); box-shadow: inset 3px 0 0 var(--accent-solid); }
+  .guion-table a { color: var(--accent); }
+  .guion-fmt { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: var(--card-2); color: var(--muted); white-space: nowrap; font-family: Poppins, sans-serif; }
+  .guion-fmt.voz { background: var(--broll-bg); color: var(--broll-ink); }
+  .guion-fmt.verde { background: var(--tof-bg); color: var(--tof); }
+  .guion-fmt.podcast { background: var(--mof-bg); color: var(--mof); }
+  .guion-legend { margin-top: 12px; font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .guion-legend .swatch { width: 14px; height: 14px; border-radius: 4px; background: var(--broll-bg); border: 1px solid var(--border-strong); border-left: 3px solid var(--accent-solid); flex-shrink: 0; }
+
+  .no-broll { padding: 14px 4px; color: var(--muted); font-style: italic; font-size: 13.5px; }
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--border); }
+  footer .brand { color: var(--accent); font-weight: 600; }
+
+  /* ===== Tablet ===== */
+  @media (max-width: 900px) {
+    .guion-table { min-width: 720px; }
+  }
+
+  /* ===== Móvil =====
+     El audiovisual suele abrir esto en el celular en pleno set: targets grandes,
+     nada de scroll horizontal y el guión se lee como fichas, no como tabla. */
+  @media (max-width: 640px) {
+    .hero-inner { padding: 26px 16px 22px; }
+    .logo { width: 44px; height: 44px; margin-bottom: 11px; }
+    h1 { font-size: 21px; }
+    .sub { font-size: 13px; }
+    .theme-btn { top: 12px; right: 12px; width: 40px; height: 40px; }
+
+    .bar-inner { padding: 10px 14px; }
+    .toolbar { gap: 7px; }
+    .chip, .reset-btn { padding: 8px 14px; font-size: 13px; }
+    .reset-btn { margin-left: 0; }
+    .briefs-text { margin-left: 0; flex-basis: 100%; order: 9; font-size: 12px; }
+
+    .wrap { padding: 4px 14px 64px; }
+    .creator-block { margin-top: 26px; }
+    .creator-title h2 { font-size: 17px; }
+
+    /* Header del reel en 3 renglones: nº+progreso · título · tags/botones/switch */
+    .reel { border-radius: 13px; }
+    .reel-head { flex-wrap: wrap; align-items: center; gap: 8px 10px; padding: 13px 14px; }
+    .reel-num { order: 1; min-width: auto; font-size: 12.5px; }
+    .reel-progress { order: 2; margin-left: auto; }
+    .caret { order: 3; }
+    .reel-title { order: 4; flex-basis: 100%; font-size: 15px; }
+    .reel-meta { order: 5; flex-basis: 100%; gap: 8px; align-items: center; }
+    .reel-meta .rec-switch { margin-left: auto; }
+    .ref-btn { padding: 8px 14px; font-size: 12px; }
+    .rec-switch-txt { font-size: 12px; }
+    .rec-track { width: 46px; height: 27px; }
+    .rec-knob { width: 21px; height: 21px; }
+    .reel.recorded .rec-knob { transform: translateY(-50%) translateX(19px); }
+
+    /* Tomas: fila alta y checkbox grande para marcar con el pulgar */
+    .reel-body { padding: 2px 14px 12px; }
+    .shot { padding: 15px 2px; gap: 12px; }
+    .checkbox { width: 26px; height: 26px; border-radius: 8px; }
+    .shot-text { font-size: 15px; }
+  }
+
+  /* ===== Guión en pantalla chica =====
+     La tabla SIGUE siendo tabla: se desliza de lado para ver las columnas (decisión
+     del usuario, 2026-08-11 — las fichas apiladas no funcionaron en set).
+     La primera columna queda fija a la izquierda para no perder el tiempo/estructura. */
+  @media (max-width: 700px) {
+    .modal-overlay { padding: 0; align-items: stretch; }
+    .modal { border-radius: 0; border: none; min-height: 100%; display: flex; flex-direction: column; }
+    .modal-head { position: sticky; top: 0; z-index: 3; background: var(--card); padding: 14px 16px; }
+    .modal-head h3 { font-size: 15.5px; }
+    .modal-close { width: 38px; height: 38px; font-size: 19px; }
+    .modal-body { max-height: none; padding: 12px 12px 40px; }
+
+    .guion-table-wrap { border-radius: 10px; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+    .guion-table { min-width: 760px; font-size: 13.5px; }
+    .guion-table td { padding: 11px 12px; }
+    .guion-table td.g-texto { font-size: 14px; }
+
+    /* Columna 1 anclada mientras se desliza el resto */
+    .guion-table th:first-child, .guion-table td:first-child { position: sticky; left: 0; z-index: 2; }
+    .guion-table th:first-child { z-index: 4; background: var(--card-2); }
+    .guion-table td:first-child { background: var(--card); box-shadow: 1px 0 0 var(--border); }
+    .guion-table tr.is-broll td:first-child { background: var(--broll-bg); }
+    .guion-table tr.is-broll td.g-est { box-shadow: inset 3px 0 0 var(--accent-solid), 1px 0 0 var(--border); }
+
+    .guion-hint { display: flex; }
+    .guion-legend { font-size: 12.5px; align-items: flex-start; }
+  }
+
+  /* Aviso de deslizamiento — solo visible en móvil */
+  .guion-hint {
+    display: none; align-items: center; gap: 7px; margin: 0 0 9px;
+    font-size: 12px; color: var(--muted); font-family: Poppins, sans-serif;
+  }
+  .guion-hint span { font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <button class="theme-btn" id="themeBtn" title="Cambiar entre modo oscuro y claro">☀</button>
+  <div class="hero-inner">
+    <img class="logo" src="data:image/png;base64,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" alt="Social Ecom Agency">
+    <h1>FEM + BIO BOOSTERS · Tomas de Apoyo · Isabella Sepúlveda</h1>
+    <div class="sub">Rodaje Isabella Sepúlveda — FEM Probiótico + Jabón + Quiz (521–525) · Focus Booster (106–110). En Focus Booster los apoyos salen del banco: en set solo se graba a la creadora.</div>
+  </div>
+</div>
+
+<div class="bar">
+  <div class="bar-inner">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">0 / 0</div>
+    </div>
+    <div class="toolbar">
+      <div class="chip active" data-filter="all">Todos</div>
+    <div class="chip" data-filter="fem">FEM</div>
+    <div class="chip" data-filter="bioboosters">Bio Boosters</div>
+      <div class="chip" data-filter="pending">Pendientes</div>
+      <span class="briefs-text" id="briefsText"></span>
+      <button class="reset-btn" id="resetBtn">Reset</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="creator-block" data-creator="fem">
+  <div class="creator-title">
+    <h2>FEM</h2>
+    <span class="count">Reels 521–525</span>
+  </div>
+  <!-- REEL 521 -->
+  <div class="reel" data-reel="521">
+    <div class="reel-head">
+      <span class="reel-num">REEL 521</span>
+      <span class="reel-title">"Hay días en los que uno revisa la ropa interior…"</span>
+      <div class="reel-meta">
+        <span class="tag tof">TOF</span>
+        <span class="tag">Pantalla verde</span>
+        <button class="ref-btn guion-btn" onclick="event.stopPropagation(); openGuion(521)">☰ Guión</button> <a class="ref-btn" href="https://app.foreplay.co/share/ads/9AFdKAbw0S7hXlvFGKQt?user=iUJsPrRRZrWDm7VyyRGUo208M2U2" target="_blank" onclick="event.stopPropagation()">▶ Ref</a> <a class="ref-btn asana-btn" href="https://app.asana.com/0/1210559174208038/1219960941704590" target="_blank" onclick="event.stopPropagation()">✎ Asana</a> <button class="rec-switch" role="switch" aria-checked="false" title="Marcar este brief como grabado" onclick="event.stopPropagation(); toggleRecorded(521)"><span class="rec-switch-txt">Grabado</span><span class="rec-track"><span class="rec-knob"></span></span></button>
+      </div>
+      <span class="reel-progress" data-reel-progress="521">0/1</span>
+      <span class="caret">›</span>
+    </div>
+    <div class="reel-body">
+      <div class="shot" data-id="521-1"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-producto">Producto</span>Plano detalle de los <strong>dos productos FEM</strong> (jabón + probióticos), para el corte rápido de la transición</div></div>
+    </div>
+  </div>
+
+  <!-- REEL 522 -->
+  <div class="reel" data-reel="522">
+    <div class="reel-head">
+      <span class="reel-num">REEL 522</span>
+      <span class="reel-title">"Que te arda no significa que esté funcionando"</span>
+      <div class="reel-meta">
+        <span class="tag tof">TOF</span>
+        <span class="tag">Macro boca</span>
+        <button class="ref-btn guion-btn" onclick="event.stopPropagation(); openGuion(522)">☰ Guión</button> <a class="ref-btn" href="https://www.kalodata.com/video/detail?id=7637638143428021534&language=es-ES&currency=USD&region=US&dateRange=%5B%222026-09-27%22%2C%222026-10-26%22%5D" target="_blank" onclick="event.stopPropagation()">▶ Ref</a> <a class="ref-btn asana-btn" href="https://app.asana.com/0/1210559174208038/1219960941704592" target="_blank" onclick="event.stopPropagation()">✎ Asana</a> <button class="rec-switch" role="switch" aria-checked="false" title="Marcar este brief como grabado" onclick="event.stopPropagation(); toggleRecorded(522)"><span class="rec-switch-txt">Grabado</span><span class="rec-track"><span class="rec-knob"></span></span></button>
+      </div>
+      <span class="reel-progress" data-reel-progress="522">0/1</span>
+      <span class="caret">›</span>
+    </div>
+    <div class="reel-body">
+      <div class="shot" data-id="522-1"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-producto">Producto</span>Plano de los <strong>dos productos FEM</strong> (jabón íntimo + probióticos) para sobreponer en la introducción</div></div>
+    </div>
+  </div>
+
+  <!-- REEL 523 -->
+  <div class="reel" data-reel="523">
+    <div class="reel-head">
+      <span class="reel-num">REEL 523</span>
+      <span class="reel-title">"Hay una prueba que hacemos las mujeres…"</span>
+      <div class="reel-meta">
+        <span class="tag tof">TOF</span>
+        <span class="tag">Voz en off</span>
+        <button class="ref-btn guion-btn" onclick="event.stopPropagation(); openGuion(523)">☰ Guión</button> <a class="ref-btn" href="https://app.foreplay.co/share/ads/8i6EaqJDQhnKAo2Hl4Wg?user=iUJsPrRRZrWDm7VyyRGUo208M2U2" target="_blank" onclick="event.stopPropagation()">▶ Ref</a> <a class="ref-btn asana-btn" href="https://app.asana.com/0/1210559174208038/1219960941704594" target="_blank" onclick="event.stopPropagation()">✎ Asana</a> <button class="rec-switch" role="switch" aria-checked="false" title="Marcar este brief como grabado" onclick="event.stopPropagation(); toggleRecorded(523)"><span class="rec-switch-txt">Grabado</span><span class="rec-track"><span class="rec-knob"></span></span></button>
+      </div>
+      <span class="reel-progress" data-reel-progress="523">0/9</span>
+      <span class="caret">›</span>
+    </div>
+    <div class="reel-body">
+      <div class="shot" data-id="523-1"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-negativa">Negativa</span>En la cama, <strong>oliendo e inspeccionando la ropa interior</strong> de forma exagerada (toma cerrada) y mirando hacia la puerta</div></div>
+      <div class="shot" data-id="523-2"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-negativa">Negativa</span>De pie, revisa que no haya nadie y vuelve a inspeccionar la ropa interior con cara <strong>exageradamente seria</strong></div></div>
+      <div class="shot" data-id="523-3"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-negativa">Negativa</span>Frente al espejo con <strong>cara de preocupación</strong>, paranoica, con la ropa interior en la mano mirando a todos lados</div></div>
+      <div class="shot" data-id="523-4"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-negativa">Negativa</span>Abre el gabinete del baño, <strong>saca varios productos</strong>, los mira confundida y los vuelve a dejar</div></div>
+      <div class="shot" data-id="523-5"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-producto">Producto</span>Toma los <strong>dos productos FEM</strong> del tocador y los acomoda frente al espejo</div></div>
+      <div class="shot" data-id="523-6"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-producto">Producto</span>Detalle de la <strong>textura y la espuma del jabón</strong></div></div>
+      <div class="shot" data-id="523-7"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-producto">Producto</span>Saca los probióticos y muestra <strong>solo dos pastillas</strong></div></div>
+      <div class="shot" data-id="523-8"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-neutra">Neutra</span>Sentada en la cama, abre el quiz de FEM en el celular (<strong>toma por encima del hombro</strong>)</div></div>
+      <div class="shot" data-id="523-9"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-positiva">Positiva</span>Toma final a cámara con el celular: <strong>expresión cómplice</strong> y señala abajo hacia el link</div></div>
+    </div>
+  </div>
+
+  <!-- REEL 524 -->
+  <div class="reel" data-reel="524">
+    <div class="reel-head">
+      <span class="reel-num">REEL 524</span>
+      <span class="reel-title">"¿Por qué, si esto es para mi QK, me lo tengo que tomar?"</span>
+      <div class="reel-meta">
+        <span class="tag mof">MOF</span>
+        <span class="tag">A cámara + cenital</span>
+        <button class="ref-btn guion-btn" onclick="event.stopPropagation(); openGuion(524)">☰ Guión</button> <a class="ref-btn" href="https://app.foreplay.co/share/ads/xBjcj3WRrU5c8ZCbgp7j?user=iUJsPrRRZrWDm7VyyRGUo208M2U2" target="_blank" onclick="event.stopPropagation()">▶ Ref</a> <a class="ref-btn asana-btn" href="https://app.asana.com/0/1210559174208038/1219960941704596" target="_blank" onclick="event.stopPropagation()">✎ Asana</a> <button class="rec-switch" role="switch" aria-checked="false" title="Marcar este brief como grabado" onclick="event.stopPropagation(); toggleRecorded(524)"><span class="rec-switch-txt">Grabado</span><span class="rec-track"><span class="rec-knob"></span></span></button>
+      </div>
+      <span class="reel-progress" data-reel-progress="524">0/4</span>
+      <span class="caret">›</span>
+    </div>
+    <div class="reel-body">
+      <div class="shot" data-id="524-1"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-producto">Producto</span>Cenital: coloca los <strong>dos productos FEM</strong> en la mesa y los acerca uno por uno a cámara (primero probióticos, luego jabón)</div></div>
+      <div class="shot" data-id="524-2"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-producto">Producto</span>Detalle del <strong>alimento con probióticos</strong> en la mano</div></div>
+      <div class="shot" data-id="524-3"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-producto">Producto</span>El <strong>jabón junto al lavamanos</strong></div></div>
+      <div class="shot" data-id="524-4"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-producto">Producto</span>Un poquito de jabón en la palma <strong>mostrando la textura</strong> (sin aplicarlo en el cuerpo)</div></div>
+    </div>
+  </div>
+
+  <!-- REEL 525 -->
+  <div class="reel" data-reel="525">
+    <div class="reel-head">
+      <span class="reel-num">REEL 525</span>
+      <span class="reel-title">"¡Me quiero arrancar la QK!"</span>
+      <div class="reel-meta">
+        <span class="tag mof">MOF</span>
+        <span class="tag">Sketch + VO</span>
+        <button class="ref-btn guion-btn" onclick="event.stopPropagation(); openGuion(525)">☰ Guión</button> <a class="ref-btn" href="https://app.foreplay.co/share/ads/8i6EaqJDQhnKAo2Hl4Wg?user=iUJsPrRRZrWDm7VyyRGUo208M2U2" target="_blank" onclick="event.stopPropagation()">▶ Ref</a> <a class="ref-btn asana-btn" href="https://app.asana.com/0/1210559174208038/1219960941704598" target="_blank" onclick="event.stopPropagation()">✎ Asana</a> <button class="rec-switch" role="switch" aria-checked="false" title="Marcar este brief como grabado" onclick="event.stopPropagation(); toggleRecorded(525)"><span class="rec-switch-txt">Grabado</span><span class="rec-track"><span class="rec-knob"></span></span></button>
+      </div>
+      <span class="reel-progress" data-reel-progress="525">0/4</span>
+      <span class="caret">›</span>
+    </div>
+    <div class="reel-body">
+      <div class="shot" data-id="525-1"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-negativa">Negativa</span>Entra al baño apresurada, cierra la puerta, se sienta en el sanitario y <strong>se mueve incómoda, se rasca</strong> (escena del pensamiento, va en blanco y negro)</div></div>
+      <div class="shot" data-id="525-2"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-negativa">Negativa</span>Sentada <strong>sin hacer nada, solo escuchando</strong>, con cara de incomodidad y desespero porque le pica, <strong>mirando hacia arriba</strong> (para los espacios en que habla la IA). Grabar varias</div></div>
+      <div class="shot" data-id="525-3"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-neutra">Neutra</span><strong>POV desde arriba</strong>: ella en el baño haciendo el quiz de FEM en el celular, como si la IA la viera</div></div>
+      <div class="shot" data-id="525-4"><div class="checkbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="shot-text"><span class="shot-tag cat-producto">Producto</span>POV frente al espejo: <strong>toma los productos del lavamanos</strong> y los mira</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="creator-block" data-creator="bioboosters">
+  <div class="creator-title">
+    <h2>Bio Boosters</h2>
+    <span class="count">Reels 106–110</span>
+  </div>
+  <!-- REEL 106 -->
+  <div class="reel" data-reel="106">
+    <div class="reel-head">
+      <span class="reel-num">REEL 106</span>
+      <span class="reel-title">"La ingeniera a la que los tiburones le dijeron que no"</span>
+      <div class="reel-meta">
+        <span class="tag tof">TOF</span>
+        <span class="tag">A cámara + Shark Tank</span>
+        <button class="ref-btn guion-btn" onclick="event.stopPropagation(); openGuion(106)">☰ Guión</button> <a class="ref-btn" href="https://app.foreplay.co/discovery?ad=pXMwJVbgcGa69O6jsRRf" target="_blank" onclick="event.stopPropagation()">▶ Ref</a> <a class="ref-btn asana-btn" href="https://app.asana.com/0/1210547332742593/1220040428830692" target="_blank" onclick="event.stopPropagation()">✎ Asana</a> <button class="rec-switch" role="switch" aria-checked="false" title="Marcar este brief como grabado" onclick="event.stopPropagation(); toggleRecorded(106)"><span class="rec-switch-txt">Grabado</span><span class="rec-track"><span class="rec-knob"></span></span></button>
+      </div>
+      <span class="reel-progress" data-reel-progress="106">—</span>
+      <span class="caret">›</span>
+    </div>
+    <div class="reel-body">
+      <div class="no-broll">Sin tomas de apoyo — todo hablado a cámara (ver Guión)</div>
+    </div>
+  </div>
+
+  <!-- REEL 107 -->
+  <div class="reel" data-reel="107">
+    <div class="reel-head">
+      <span class="reel-num">REEL 107</span>
+      <span class="reel-title">"Una bebida a la que la gente se está pasando calladita"</span>
+      <div class="reel-meta">
+        <span class="tag tof">TOF</span>
+        <span class="tag">Pantalla dividida</span>
+        <button class="ref-btn guion-btn" onclick="event.stopPropagation(); openGuion(107)">☰ Guión</button> <a class="ref-btn" href="https://app.foreplay.co/discovery?ad=eGZ2vw9D7pJ2oN3J8BmX" target="_blank" onclick="event.stopPropagation()">▶ Ref</a> <a class="ref-btn asana-btn" href="https://app.asana.com/0/1210547332742593/1220040428810217" target="_blank" onclick="event.stopPropagation()">✎ Asana</a> <button class="rec-switch" role="switch" aria-checked="false" title="Marcar este brief como grabado" onclick="event.stopPropagation(); toggleRecorded(107)"><span class="rec-switch-txt">Grabado</span><span class="rec-track"><span class="rec-knob"></span></span></button>
+      </div>
+      <span class="reel-progress" data-reel-progress="107">—</span>
+      <span class="caret">›</span>
+    </div>
+    <div class="reel-body">
+      <div class="no-broll">Sin tomas de apoyo — todo hablado a cámara (ver Guión)</div>
+    </div>
+  </div>
+
+  <!-- REEL 108 -->
+  <div class="reel" data-reel="108">
+    <div class="reel-head">
+      <span class="reel-num">REEL 108</span>
+      <span class="reel-title">"Esta es la fábrica de la bebida que rechazaron en Shark Tank"</span>
+      <div class="reel-meta">
+        <span class="tag tof">TOF</span>
+        <span class="tag">Voz en off (fábrica)</span>
+        <button class="ref-btn guion-btn" onclick="event.stopPropagation(); openGuion(108)">☰ Guión</button> <a class="ref-btn" href="https://app.foreplay.co/discovery?ad=tRQptuthVwyB8VbdGRCg" target="_blank" onclick="event.stopPropagation()">▶ Ref</a> <a class="ref-btn asana-btn" href="https://app.asana.com/0/1210547332742593/1220040348123215" target="_blank" onclick="event.stopPropagation()">✎ Asana</a> <button class="rec-switch" role="switch" aria-checked="false" title="Marcar este brief como grabado" onclick="event.stopPropagation(); toggleRecorded(108)"><span class="rec-switch-txt">Grabado</span><span class="rec-track"><span class="rec-knob"></span></span></button>
+      </div>
+      <span class="reel-progress" data-reel-progress="108">—</span>
+      <span class="caret">›</span>
+    </div>
+    <div class="reel-body">
+      <div class="no-broll">Sin tomas de apoyo — todo hablado a cámara (ver Guión)</div>
+    </div>
+  </div>
+
+  <!-- REEL 109 -->
+  <div class="reel" data-reel="109">
+    <div class="reel-head">
+      <span class="reel-num">REEL 109</span>
+      <span class="reel-title">"Creo que soy adicta al tinto"</span>
+      <div class="reel-meta">
+        <span class="tag tof">TOF</span>
+        <span class="tag">Pantalla verde</span>
+        <button class="ref-btn guion-btn" onclick="event.stopPropagation(); openGuion(109)">☰ Guión</button> <a class="ref-btn" href="https://app.foreplay.co/discovery?ad=HldYmgWSRcpOj75HOlgT" target="_blank" onclick="event.stopPropagation()">▶ Ref</a> <a class="ref-btn asana-btn" href="https://app.asana.com/0/1210547332742593/1220040428691880" target="_blank" onclick="event.stopPropagation()">✎ Asana</a> <button class="rec-switch" role="switch" aria-checked="false" title="Marcar este brief como grabado" onclick="event.stopPropagation(); toggleRecorded(109)"><span class="rec-switch-txt">Grabado</span><span class="rec-track"><span class="rec-knob"></span></span></button>
+      </div>
+      <span class="reel-progress" data-reel-progress="109">—</span>
+      <span class="caret">›</span>
+    </div>
+    <div class="reel-body">
+      <div class="no-broll">Sin tomas de apoyo — todo hablado a cámara (ver Guión)</div>
+    </div>
+  </div>
+
+  <!-- REEL 110 -->
+  <div class="reel" data-reel="110">
+    <div class="reel-head">
+      <span class="reel-num">REEL 110</span>
+      <span class="reel-title">"Está muy caro"</span>
+      <div class="reel-meta">
+        <span class="tag mof">MOF</span>
+        <span class="tag">Respondiendo comentario</span>
+        <button class="ref-btn guion-btn" onclick="event.stopPropagation(); openGuion(110)">☰ Guión</button> <a class="ref-btn" href="https://app.foreplay.co/discovery?ad=MdZe9eMHjKj35ahvsalQ" target="_blank" onclick="event.stopPropagation()">▶ Ref</a> <a class="ref-btn asana-btn" href="https://app.asana.com/0/1210547332742593/1220040425864511" target="_blank" onclick="event.stopPropagation()">✎ Asana</a> <button class="rec-switch" role="switch" aria-checked="false" title="Marcar este brief como grabado" onclick="event.stopPropagation(); toggleRecorded(110)"><span class="rec-switch-txt">Grabado</span><span class="rec-track"><span class="rec-knob"></span></span></button>
+      </div>
+      <span class="reel-progress" data-reel-progress="110">—</span>
+      <span class="caret">›</span>
+    </div>
+    <div class="reel-body">
+      <div class="no-broll">Sin tomas de apoyo — todo hablado a cámara (ver Guión)</div>
+    </div>
+  </div>
+</div>
+
+<footer>Tu progreso se guarda automáticamente en este navegador · FEM 521–525 · Bio Boosters 106–110<br><span class="brand">SOCIAL ECOM AGENCY</span></footer>
+
+</div>
+
+<!-- Modal Guión -->
+<div class="modal-overlay" id="guionModal" onclick="closeGuion(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <div>
+        <h3 id="modalTitle">Guión</h3>
+        <div class="modal-sub" id="modalSub"></div>
+      </div>
+      <button class="modal-close" onclick="closeGuion()">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'broll_fem_521_525_bioboosters_106_110_v1';
+  const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+  function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+  // === Tema oscuro / claro ===
+  const themeBtn = document.getElementById('themeBtn');
+  function paintThemeBtn() {
+    const light = document.documentElement.getAttribute('data-theme') === 'light';
+    themeBtn.textContent = light ? '☾' : '☀';
+    themeBtn.title = light ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro (mejor bajo el sol)';
+  }
+  themeBtn.addEventListener('click', () => {
+    const light = document.documentElement.getAttribute('data-theme') === 'light';
+    if (light) document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', 'light');
+    try { localStorage.setItem(STORAGE_KEY + '_theme', light ? 'dark' : 'light'); } catch (e) {}
+    paintThemeBtn();
+  });
+  paintThemeBtn();
+
+  function updateProgress() {
+    const allShots = document.querySelectorAll('.shot');
+    const total = allShots.length;
+    const done = document.querySelectorAll('.shot.checked').length;
+    const pct = total ? (done / total) * 100 : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = done + ' / ' + total + ' (' + Math.round(pct) + '%)';
+
+    document.querySelectorAll('.reel').forEach(reel => {
+      const shots = reel.querySelectorAll('.shot');
+      const checked = reel.querySelectorAll('.shot.checked');
+      const el = reel.querySelector('[data-reel-progress]');
+      if (reel.classList.contains('recorded')) {
+        el.textContent = 'grabado';
+        el.classList.add('done');
+        return;
+      }
+      el.textContent = shots.length ? checked.length + '/' + shots.length : 'sin b-roll';
+      if (checked.length === shots.length && shots.length > 0) {
+        el.classList.add('done');
+      } else {
+        el.classList.remove('done');
+      }
+    });
+
+    const totalReels = document.querySelectorAll('.reel').length;
+    const recReels = document.querySelectorAll('.reel.recorded').length;
+    const briefsEl = document.getElementById('briefsText');
+    if (briefsEl) briefsEl.innerHTML = '<b>' + recReels + '</b> / ' + totalReels + ' briefs grabados';
+  }
+
+  // === Marcar el BRIEF COMPLETO como grabado ===
+  // Es independiente de los checkboxes de tomas: el PM puede darlo por grabado
+  // aunque queden tomas sin marcar (o marcarlas todas y aun así no darlo por cerrado).
+  // El brief grabado NO se reordena: se queda en su sitio y solo se tacha
+  // (decisión del usuario, 2026-08-11 — mover la tarjeta desubica al equipo en set).
+  const REC = '__rec_';
+
+  // Mantiene el estado accesible del switch iOS alineado con la clase .recorded
+  function syncSwitches() {
+    document.querySelectorAll('.reel').forEach(reel => {
+      const sw = reel.querySelector('.rec-switch');
+      if (sw) sw.setAttribute('aria-checked', reel.classList.contains('recorded') ? 'true' : 'false');
+    });
+  }
+
+  function toggleRecorded(num) {
+    const reel = document.querySelector('.reel[data-reel="' + num + '"]');
+    if (!reel) return;
+    const on = !reel.classList.contains('recorded');
+    reel.classList.toggle('recorded', on);
+    if (on) {
+      reel.classList.remove('open');
+      state[REC + num] = true;
+    } else {
+      delete state[REC + num];
+    }
+    save();
+    syncSwitches();
+    updateProgress();
+    applyFilter();
+  }
+
+  // Restore state
+  document.querySelectorAll('.shot').forEach(shot => {
+    const id = shot.dataset.id;
+    if (state[id]) shot.classList.add('checked');
+
+    shot.addEventListener('click', () => {
+      shot.classList.toggle('checked');
+      state[id] = shot.classList.contains('checked');
+      save();
+      updateProgress();
+      applyFilter();
+    });
+  });
+
+  // Reel toggles
+  document.querySelectorAll('.reel-head').forEach(head => {
+    head.addEventListener('click', () => {
+      head.parentElement.classList.toggle('open');
+    });
+  });
+
+  // Filters
+  let currentFilter = 'all';
+  function applyFilter() {
+    document.querySelectorAll('.creator-block').forEach(block => {
+      const creator = block.dataset.creator;
+      if (currentFilter !== 'all' && currentFilter !== 'pending' && creator !== currentFilter) block.style.display = 'none';
+      else block.style.display = '';
+    });
+
+    document.querySelectorAll('.reel').forEach(reel => {
+      if (currentFilter === 'pending') {
+        const shots = reel.querySelectorAll('.shot');
+        const allDone = Array.from(shots).every(s => s.classList.contains('checked'));
+        const rec = reel.classList.contains('recorded');
+        reel.classList.toggle('hidden', rec || (allDone && shots.length > 0));
+      } else {
+        reel.classList.remove('hidden');
+      }
+    });
+  }
+
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentFilter = chip.dataset.filter;
+      applyFilter();
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if (confirm('¿Borrar todo el progreso?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      document.querySelectorAll('.shot.checked').forEach(s => s.classList.remove('checked'));
+      document.querySelectorAll('.reel.recorded').forEach(r => r.classList.remove('recorded'));
+      Object.keys(state).forEach(k => delete state[k]);
+      syncSwitches();
+      updateProgress();
+      applyFilter();
+    }
+  });
+
+  // Restaurar los briefs ya marcados como grabados (en su posición original)
+  document.querySelectorAll('.reel').forEach(reel => {
+    if (state[REC + reel.dataset.reel]) reel.classList.add('recorded');
+  });
+  syncSwitches();
+
+  // Open first reel by default (el primero que no esté grabado)
+  const firstReel = document.querySelector('.reel:not(.recorded)');
+  if (firstReel) firstReel.classList.add('open');
+  updateProgress();
+
+  // === GUIONES ===
+  const GUIONES = {
+  "521": {
+    "title": "REEL 521 — Isabella Sepúlveda",
+    "sub": "TOF · Pantalla verde · \"Hay días en los que uno revisa la ropa interior…\"",
+    "cols": [
+      "Estructura",
+      "Texto",
+      "Formato",
+      "Audiovisual",
+      "Edición"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "<strong>HOOK (0:00–0:05)",
+          "Hay días en los que uno revisa la ropa interior más que el celular. Y las que saben, saben",
+          "Pantalla verde + A camara",
+          "De fondo, clip breve de un protector diario con una marca de flujo visible, realista y no explícita. https://drive.google.com/file/d/1fpJ8EnKzF0L9fniOyBQYBVdVIueGwm8A/view?usp=sharing\n\nLa creadora aparece recortada a un lado, mira la imagen, levanta las cejas y señala hacia atrás con expresión de complicidad.",
+          "Pantalla verde desde el primer fotograma. Texto destacado: <strong>“¿SOY LA ÚNICA? 👀”. Subtítulos sincronizados. Sin zoom gráfico a la mancha."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>IDENTIFICACIÓN (0:05–0:11)",
+          "Porque nadie te explica que el flujo cambia durante el mes. Y uno ahí, mirando y pensando: ¿esto es normal o qué?",
+          "A camara",
+          "Corte a la creadora en pantalla completa, sentada en su habitación o baño. Habla directamente a cámara, con gestos espontáneos, como contándole algo a una amiga.",
+          "Corte seco. Mantener la voz natural y las pausas. Sin música."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>SOBREPOSICIONES (0:11–0:17)",
+          "Y ni hablemos de las cosas que uno termina buscando en internet. O sea, ¡qué vergüenza mi historial!",
+          "A camara + dos imágenes sobrepuestas",
+          "La creadora sigue hablando en primer plano. Aparecen dos capturas recreadas encima de su cabeza: <strong>“¿Es normal tener tanto flujo?” y <strong>“¿Qué puedo usar para mi cuidado íntimo?”. Mira hacia arriba, señalándolas con una expresión divertida.",
+          "Mantener la composición de la referencia original. Las dos imágenes aparecen juntas; luego una desaparece y la otra permanece brevemente."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>TRANSICIÓN A FEM (0:17–0:22)",
+          "Y si tú también estás perdida con qué usar ahí abajo, mira esto",
+          "A camara + inserto de producto",
+          "La creadora toma el Dúo Perfecto FEM que está a su lado. Muestra ambos envases brevemente, sin detenerse a enumerar beneficios.",
+          "Corte rápido a plano detalle de los dos productos y regreso inmediato al rostro."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>CTA — QUIZ (0:22–0:27)",
+          "FEM tiene un quiz que te ayuda a encontrar qué producto va contigo. Hazlo y me cuentas",
+          "A camara + sobreposición de quiz",
+          "La creadora sostiene su celular mostrando la pantalla inicial del quiz de FEM. Se intercala una grabación real de la página del test, sin mostrar resultados inventados. https://drive.google.com/file/d/1grxA1sox-4aChyDMgaQ1hgWiN9-QTo74/view?usp=sharing",
+          "Texto final: <strong>“HAZ EL QUIZ DE FEM”. Señal visual discreta hacia el enlace, sin tapar la interfaz."
+        ],
+        "broll": false
+      }
+    ]
+  },
+  "522": {
+    "title": "REEL 522 — Isabella Sepúlveda",
+    "sub": "TOF · Macro boca · \"Que te arda no significa que esté funcionando\"",
+    "cols": [
+      "Estructura",
+      "Texto",
+      "Formato",
+      "Audiovisual",
+      "Edición"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "<strong>HOOK (0:00–0:05)",
+          "<strong>Comentario en pantalla:“Yo pensé que si me ardía después de lavarme era porque estaba quedando bien limpia”. \n<strong>Creadora:“¿CÓMO ASÍ? Amiga, que te arda no significa que esté funcionando”.",
+          "Primer plano de la boca + respuesta a comentario",
+          "La cámara encuadra únicamente la boca y parte de la nariz y el mentón (como la referencia). La creadora lee el comentario, hace una pausa de incredulidad y abre la boca antes de responder. El comentario recreado aparece en la zona superior visible del encuadre",
+          "Empezar directamente con el comentario y la boca ocupando casi toda la pantalla. Sin introducción. Mantener el comentario visible durante la reacción. Subtítulos grandes y legibles."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>DESARROLLO / IDENTIFICACIÓN (0:05–0:11)",
+          "O sea, ¿quién nos metió en la cabeza que si un jabón arde es porque está limpiando más?",
+          "Primer plano de la boca",
+          "Se mantiene el mismo encuadre de la boca. La creadora habla con indignación divertida, como si le estuviera respondiendo a una amiga",
+          "Sin cambios de plano. Conservar gestos y pausas naturales. Destacar en subtítulos: <strong>“¿SI ARDE, LIMPIA MÁS?”"
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>ROMPER LA CREENCIA (0:11–0:16)",
+          "No, mi amor. La zona íntima no tiene por qué arder para estar limpia. Y lavarla por dentro, menos",
+          "Primer plano de la boca",
+          "La creadora continúa hablando en primer plano. Puede negar con la cabeza ligeramente, sin perder el encuadre de la boca",
+          "Corte mínimo, solo si es necesario para mantener el ritmo. Texto breve: <strong>“ARDOR ≠ LIMPIEZA”."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>INTRODUCCIÓN A FEM (0:16–0:21)",
+          "Por eso, antes de usar cualquier cosa ahí abajo, yo empezaría por entender qué producto necesito",
+          "A camara + inserto de producto",
+          "La cámara se abre por primera vez para mostrar el rostro completo de la creadora. Ella sostiene el jabón íntimo FEM y el alimento con probióticos. Los muestra brevemente, sin atribuirles el tratamiento del ardor",
+          "Corte seco del plano macro al plano medio. Sobreposición discreta de los productos. No agregar una lista de beneficios."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>CTA — QUIZ (0:21–0:26)",
+          "FEM tiene un quiz que te ayuda a elegir. Hazlo antes de seguir comprando a ciegas",
+          "A camara + grabación de pantalla",
+          "La creadora muestra en su celular el quiz real de FEM. Se intercala una grabación breve de la página de inicio del cuestionario.",
+          "Texto final: <strong>“HAZ EL QUIZ DE FEM”. Mostrar el enlace o indicador de acceso según la plataforma. Final directo, sin despedida."
+        ],
+        "broll": false
+      }
+    ]
+  },
+  "523": {
+    "title": "REEL 523 — Isabella Sepúlveda",
+    "sub": "TOF · Voz en off · \"Hay una prueba que hacemos las mujeres…\"",
+    "cols": [
+      "Estructura",
+      "Texto",
+      "Formato",
+      "Audiovisual",
+      "Edición"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "<strong>HOOK (0:00–0:04)",
+          "<strong>VO: Hay una prueba que hacemos las mujeres… y que jamás admitiríamos en público",
+          "Voz en off + actuación",
+          "La creadora está en la cama, sosteniendo su ropa interior,a la mira y se la acerca de forma exagerada a olerla e inspeccionarla (toma cerrada de ella oliendola de manera exagerada). De repente, mira hacia la puerta como si alguien pudiera descubrirla.",
+          "Iniciar directamente con la acción. Texto: <strong>“LA PRUEBA QUE NADIE ADMITE HACER…”. Pausa breve antes de “en público”."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "<strong>REVELACIÓN (0:04–0:08)",
+          "<strong>VO: Sí, esa de revisar la ropa interior como si estuviéramos buscando pruebas de un crimen",
+          "Voz en off + actuación",
+          "Se para revisa que no haya nadie, mira a ambos lados y vuelve a inspeccionar su ropa interior con expresión exageradamente seria para ver si encuentra algún olor extraño",
+          "Corte seco. Texto: <strong>“MODO CSI: ACTIVADO”. Efecto de suspenso muy breve."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "<strong>IDENTIFICACIÓN (0:08–0:13)",
+          "<strong>VO: Porque una cosa es sentir que algo huele raro… y otra empezar a pensar: ‘¿será que alguien más lo nota?’",
+          "Voz en off + actuación",
+          "Se mira al espejo con cara de preocupación. Luego siente que pasa alguien, como si estuviera paranoica, mirando alla abajo (haciendo referencia a la vagina) y sigue con la ropa interior en la mano y mirando para todos lados",
+          "Dos cortes rápidos y un acercamiento a su expresión."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "<strong>CONFLICTO (0:13–0:18)",
+          "<strong>VO: Y ahí vamos, a buscar cualquier cosa para echarse ahí abajo, como si eso fuera a resolver el misterio",
+          "Voz en off + actuación",
+          "Abre el gabinete del baño, saca varios productos, los mira confundida y los vuelve a dejar.",
+          "Cortes rápidos siguiendo sus manos."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "<strong>FEM ORGÁNICO (0:18–0:24)",
+          "<strong>VO: Yo por eso empecé a ponerle más cuidado a lo que uso. Conocí FEM, me encanto el duo perfecto y lo sumé a mi rutina, todos los dias SIN FALTAA! viene un jaboncillo intimo y los probióticos que me tomo dos al dia",
+          "Voz en off + producto",
+          "La creadora toma los dos productos FEM que tiene sobre el tocador, los acomoda frente al espejo y muestra textura del jabon y espuma, y luego saca los probióticos, las pastillas y al mencionar dos, muestra sol dos",
+          "Planos detalle naturales de ambos productos, sin detener el ritmo del video ni añadir explicaciones técnicas."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "<strong>QUIZ + CTA (0:24–0:32)",
+          "<strong>VO: Y si tú también estás como: ‘bueno, ¿y qué uso?’, FEM tiene un quiz que te ayuda a elegir. Hazlo antes de seguir comprando a lo loca, te dejo el link aqui abajo",
+          "Voz en off + celular",
+          "Sentada en la cama, la creadora abre el quiz de FEM en su celular (toma por encima de lso hombros). luego lo responde mientras hace una expresión cómplice hacia cámara (toma final a camara ella en el celular y hace la expresión cómplice y señala abajo hacia el link)",
+          "Inserto de la pantalla real del quiz. Texto final: <strong>“HAZ EL QUIZ DE FEM”."
+        ],
+        "broll": true
+      }
+    ]
+  },
+  "524": {
+    "title": "REEL 524 — Isabella Sepúlveda",
+    "sub": "MOF · A cámara + cenital · \"¿Por qué, si esto es para mi QK, me lo tengo que tomar?\"",
+    "cols": [
+      "Estructura",
+      "Texto",
+      "Formato",
+      "Audiovisual",
+      "Edición"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "<strong>HOOK (0:00–0:04)",
+          "A ver, ¿por qué, si esto es para mi QK, me lo tengo que tomar?",
+          "A camara + primer plano del producto",
+          "La creadora aparece en una cocina, sosteniendo la presentación real del alimento con probióticos FEM entre sus dedos, muy cerca del lente (como la referencia). Mira el producto, luego a cámara, con expresión genuina de confusión",
+          "Iniciar directamente con el producto ocupando buena parte de la pantalla. Subtítulo destacado: <strong>“¿PARA MI QK… PERO ME LO TOMO?”. Sin introducción ni música."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>CURIOSIDAD (0:04–0:08)",
+          "Porque yo juraba que todo lo que decía ‘cuidado íntimo’ era para echarse ahí abajo",
+          "A camara",
+          "La creadora retira el producto del lente, lo observa y hace un gesto hacia abajo con la mano libre, sin señalar ni mostrar zonas íntimas pero haciendo referencia a ella",
+          "Corte seco a plano medio. Mantener el tono de conversación espontánea."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>REVELACIÓN VISUAL (0:08–0:14)",
+          "Pero mira: esto es un alimento con probióticos… y esto es un jabón íntimo. No son la misma cosa",
+          "Plano cenital + manipulación de producto",
+          "Sobre una mesa, la creadora coloca ambos productos FEM. Toma primero el alimento con probióticos y después el jabón, acercándolos uno por uno a la cámara",
+          "Alternar primeros planos de ambos envases. Textos breves: <strong>“SE CONSUME”y <strong>“USO EXTERNO”."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>EXPLICACIÓN (0:14–0:21)",
+          "Los probióticos me tomo 2 al dia y el jabón es para lavar por fuera, no para metértelo por dentro",
+          "A camara + planos detalle",
+          "La creadora muestra la presentación del alimento con probióticos, luego el jabón junto al lavamanos. Puede colocar una pequeña cantidad de jabón en la palma para demostrar la textura, sin aplicarlo sobre el cuerpo",
+          "Cortes limpios entre el rostro y los productos. Resaltar <strong>“POR FUERA, NO POR DENTRO”. No representar ingesta sin confirmar presentación y dosis."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>GIRO / OBJECIÓN (0:21–0:27)",
+          "Y ahí fue cuando entendí por qué vienen juntos: porque una cosa es lo que consumes y otra muy diferente es cómo te cuidas por fuera",
+          "A camara",
+          "La creadora regresa a plano medio, sostiene ambos productos y los deja sobre la mesa mientras habla. Gesto de aclaración con las manos",
+          "Mantener un solo plano y una pausa natural después de “y ojo”. Texto en pantalla: <strong>“NO ES COMPRAR POR COMPRAR”."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>CTA — QUIZ (0:27–0:34)",
+          "Y si tú también quieres saber más sobre esta rutina, FEM tiene un quiz que te orienta para elegir. Hazlo y sales de la duda",
+          "A camara + pantalla del quiz",
+          "La creadora toma su celular y muestra el inicio del quiz real de FEM. Se intercala una grabación de pantalla breve con el cuestionario",
+          "Texto final: <strong>“DESCUBRE QUÉ PRODUCTO FEM VA CONTIGO” y <strong>“HAZ EL QUIZ”. Final directo, sin despedida."
+        ],
+        "broll": false
+      }
+    ]
+  },
+  "525": {
+    "title": "REEL 525 — Isabella Sepúlveda",
+    "sub": "MOF · Sketch + VO · \"¡Me quiero arrancar la QK!\"",
+    "cols": [
+      "Estructura",
+      "Texto",
+      "Formato",
+      "Audiovisual",
+      "Edición"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "<strong>HOOK (0:00–0:05)",
+          "<strong>VO CREADORA: “Ay, no, no, no… ¡me quiero arrancar la QK!”\n\n <strong>IA:“Analizando tu vida íntima…”. \n\n<strong>CREADORA: “¿MI QUE!?”",
+          "Sketch / Plano general",
+          "La creadora entra al baño apresurada, cierra la puerta y se sienta en el sanitario. Se mueve incómoda (de manera exagerada), \"se rasca\" y mira al techo cuando escucha la voz, asustada y buscando de donde sale. Esta primera parte es VO porque esto: “Ay, no, no, no… ¡me quiero arrancar la QK!” es un pensamiento desesperado de ella entrando al baño apresurada, cerrando la puerta y sentándose en el sanitario y rascándose",
+          "Corte directo al movimiento. Sonido breve de activación de IA antes de su primera frase. Texto: <strong>“CUANDO TU IA SABE DEMASIADO 💀”. poner esta primera escena en blanco y negro, y ponerle a la voz un efecto como de eco porque se supone que es el pensamiento y ya cuando entra la voz de la IA se pasa el resto del video a color"
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>CONFLICTO (0:05–0:10)",
+          "<strong>IA: “Tu rutina de cuidado de QK. Aunque tu vida amorosa también necesita revisión””. \n<strong>CREADORA: “¡¿Y TÚ QUÉ SABES DE MI QK?!”",
+          "Sketch / Plano medio",
+          "La creadora sigue sentada, se queda inmóvil de la indignación y mira hacia arriba como si la IA estuviera instalada en el techo. y responde gritando",
+          "Pausa de medio segundo después de “menos información”. Acercamiento con corte seco a su reacción."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>GIRO (0:10–0:15)",
+          "<strong>IA: “¿siquiera sabes que es todo lo que le hechas pasea picazón?” \n<strong>CREADORA:“No, pero ya estoy haciendo la tarea”.",
+          "Sketch / Plano medio",
+          "La creadora sigue sentada en el baño incomoda de la piquiña, pero se muestra como ya esta buscado en el celular FEM, peor aun sigue inquieta y con cara de incomodidad",
+          "Corte rápido del sanitario al tocador."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>PRESENTACIÓN DEL DÚO (0:15–0:22)",
+          "<strong>CREADORA: “Estoy haciendo el quiz de FEM”.",
+          "Sketch / Plano medio",
+          "Creadora se ve haceindo el quiz de FEM (primero toma de medio plano ella en el baño, luego toma POV de ella en el baño haciendo qel quiz, como si la IA estuviera viendo desde arriba) y pone cara de: mira lo estoy haciendo, solucionando, sin tu ayuda",
+          "Planos detalle breves. Textos: <strong>“ALIMENTO CON PROBIÓTICOS” y <strong>“JABÓN · USO EXTERNO”."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "<strong>QUIZ + REMATE (0:22–0:31)",
+          "<strong>IA: “¿Y cómo sabes cuál elegir?” \n<strong>CREADORA: “No elijo, el me guía, por ejemplo mira este DUO que tienen de probióticos y jabon, deberías hacerlo e ir a joder a otra”. \n<strong>IA:“Excelente. Ahora, sobre tu vida amorosa…” <strong>CREADORA: “¡SAL DE MI BAÑO!”",
+          "Sketch + pantalla de celular",
+          "La creadora se para del baño, y va frente al espejo y con los productos los toma del lavamanos y los ve (toma tipo POV) . Cuando la IA menciona su vida amorosa, mira al techo, señala la puerta y hace un gesto de expulsarla.",
+          "Mostrar brevemente la interfaz real del quiz. Corte seco en “¡SAL DE MI BAÑO!”. Texto final: <strong>“HAZ EL QUIZ DE FEM”."
+        ],
+        "broll": false
+      }
+    ]
+  },
+  "106": {
+    "title": "REEL 106 — Isabella Sepúlveda",
+    "sub": "TOF · A cámara + Shark Tank · \"La ingeniera a la que los tiburones le dijeron que no\"",
+    "cols": [
+      "Estructura",
+      "Texto",
+      "Formato",
+      "Audiovisual",
+      "Edición"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "Hook",
+          "Probablemente la conoces como la ingeniera a la que los tiburones le dijeron que no en Shark Tank…",
+          "A cámara + clip de Shark Tank",
+          "Creadora a cámara.\nShark Tank, el \"estoy fuera\" (del 11:07 al 11:17): capítulo en YouTube.\nShark Tank, Valentina presentando Focus Booster (del 0:17 al 0:32): shark_tank (Drive).",
+          "Mitad superior: el \"estoy fuera\". Congelar en blanco y negro apenas ella diga \"gracias\".\nTexto: \"SI TE CUESTA CONCENTRARTE, MIRA ESTO 👀\"."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Pero lo que hizo después salió en Portafolio y en Semana.",
+          "A cámara con tomas de apoyo",
+          "Creadora a cámara.\nApoyos: SHOW_E6_IMG_1733",
+          "Imágenes flotantes que la creadora señala: Pantallazo del titular de Portafolio y Pantallazo del titular de Semana. Entran una en cada palabra."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Se llama Valentina, es ingeniera química, y en vez de rendirse llevó su fórmula a un estudio.",
+          "A cámara con tomas de apoyo",
+          "Creadora a cámara.\nApoyos: PROD_E1_IMG_6147\nShark Tank, Valentina presentando: shark_tank (Drive) (del 0:17 al 0:32, sin audio).",
+          "Pantallazo flotante del encabezado de la página del estudio (\"Estudio piloto · 10 adultos sanos · 3 meses\")."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Le dieron Focus Booster a 10 personas durante tres meses y les midieron el cerebro antes y después. Y uno de ellos dijo esto:",
+          "A cámara con tomas de apoyo",
+          "Creadora a cámara.\nApoyos: PPOV_E2_IMG_8189 · PPOV_E2_IMG_7360",
+          "Texto: \"ESTUDIO PILOTO · 10 PERSONAS · 3 MESES\"."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "\"Yo tendía a ser alguien muy disperso, y Focus Booster me ayudó muchísimo a concentrarme.\"",
+          "Voz en off",
+          "Apoyos: NEG_E2_IMG_8165 (distraída con el celular) → POS_E1_IMG_6229 (trabajando enfocada).",
+          "La frase entre comillas en pantalla con \"Alejandro, participante del estudio\". Subtítulos completos en este bloque."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Yo me lo tomo antes de sentarme a trabajar y dejo de saltar de una cosa a la otra.",
+          "A cámara con tomas de apoyo",
+          "Creadora a cámara.\nApoyos: CONS_E2_IMG_7337 · POS_E2_IMG_7336",
+          "Toma estrella: el congelado del \"estoy fuera\" contra ella trabajando concentrada con la bebida rosada."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "CTA",
+          "Ya ha llegado a más de 17.000 personas. Créeme: los tiburones se lo perdieron, tú no te lo pierdas. Te lo dejo aquí abajo.",
+          "A cámara con tomas de apoyo",
+          "Creadora a cámara.\nApoyos: SHOW_E1_IMG_6177 · PROD_E6_IMG_1717",
+          "Texto: \"+17.000 PERSONAS (Portafolio)\". Packshot del tarro + logo Bioboosters + flecha al botón."
+        ],
+        "broll": true
+      }
+    ]
+  },
+  "107": {
+    "title": "REEL 107 — Isabella Sepúlveda",
+    "sub": "TOF · Pantalla dividida · \"Una bebida a la que la gente se está pasando calladita\"",
+    "cols": [
+      "Estructura",
+      "Texto",
+      "Formato",
+      "Audiovisual",
+      "Edición"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "Hook",
+          "Hay una bebida a la que la gente que trabaja frente a un computador se está pasando calladita, y casi nadie habla de eso. La gente que trabaja todo el día en el computador está tomando esta bebida calladita, y casi nadie habla de eso.",
+          "A cámara en pantalla dividida",
+          "Creadora a cámara, sentada frente al portátil.\nMitad inferior: PROD_E1_IMG_6147 (el tarro, fijo todo el video).",
+          "Pantalla dividida todo el video: creadora arriba, tarro abajo. Subtítulos dinámicos."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Todo lo que hay para concentrarse es o un tinto que te acelera y a las tres de la tarde te tumba, o la pastillita de película, tipo Sin Límites o Lucy.",
+          "A cámara con tomas de apoyo",
+          "Creadora a cámara.\nApoyos: NEG_E2_IMG_7306 · NEG_E2_IMG_7673",
+          "En \"Sin Límites\": FOTO flotante de la película Sin Límites. En \"Lucy\": FOTO flotante de la película Lucy [insertar referencia visual]. Solo fotos, nunca video de las películas."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Ninguna de las dos es lo que uno quiere un martes cualquiera.",
+          "A cámara con tomas de apoyo",
+          "Creadora a cámara.\nApoyos: NEG_E1_IMG_6640",
+          "Tachar en pantalla: ~~TINTO~~ ~~PASTILLA~~."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Una compañera me mostró esta: Focus Booster, de Bioboosters. 1.500 miligramos de melena de león, magnesio, omega 3 y vitaminas B.",
+          "Voz en off",
+          "Apoyos: PROD_E6_IMG_1717 · PPOV_E6_IMG_1716.",
+          "Texto por ingrediente: \"1.500 mg MELENA DE LEÓN\" · \"MAGNESIO\" · \"OMEGA 3\" · \"VITAMINAS B\"."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Y solo 15 miligramos de cafeína, mucho menos que un café. Sin azúcar añadida, sin el acelere y sin el bajón de las tres.",
+          "Voz en off",
+          "Apoyos: PPOV_E2_IMG_8190 · POS_E2_IMG_8193 (trabajando con la bebida al lado).",
+          "Texto: \"15 mg DE CAFEÍNA ☕ (mucho menos que un café)\" · \"Sin azúcar añadida ✓\"."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "CTA",
+          "Dos de la oficina lo pidieron después de mí. Los que saben, saben. Y ahora tú también. Si te suscribes te sale 15% más barato y con envío gratis. Te lo dejo aquí abajo.",
+          "A cámara con tomas de apoyo",
+          "Creadora a cámara.\nApoyos: CONS_E1_IMG_6237",
+          "Texto: \"SUSCRIPCIÓN −15% + ENVÍO GRATIS\". Packshot + flecha al botón."
+        ],
+        "broll": true
+      }
+    ]
+  },
+  "108": {
+    "title": "REEL 108 — Isabella Sepúlveda",
+    "sub": "TOF · Voz en off (fábrica) · \"Esta es la fábrica de la bebida que rechazaron en Shark Tank\"",
+    "cols": [
+      "Estructura",
+      "Texto",
+      "Formato",
+      "Audiovisual",
+      "Edición"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "Hook",
+          "Si alguna vez te preguntaste de dónde sale lo que te tomas para concentrarte, mira. Esta es la fábrica de la bebida que rechazaron en Shark Tank.",
+          "Voz en off",
+          "Bodega: IMG_3518.\nFábrica: FAB_E4_IMG_7844.\nEn \"Shark Tank\": el \"estoy fuera\" en YouTube (del 11:07 al 11:17, dos segundos).",
+          "Texto grande: \"ADENTRO DE LA FÁBRICA DE FOCUS BOOSTER 🏭\". Subtítulos completos en todo el video. Música rítmica tipo recorrido."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Desde que salió en Portafolio y en Semana esto no ha parado. Vamos adentro.",
+          "Voz en off",
+          "FAB_E4_IMG_7845 (bolsas de materia prima).",
+          "Imágenes flotantes: Pantallazo del titular de Portafolio y Pantallazo del titular de Semana, entran en \"Portafolio\" y en \"Semana\"."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Aquí se mezcla todo: 1.500 miligramos de melena de león por porción, magnesio, omega 3 y vitaminas B.",
+          "Voz en off",
+          "FAB_E4_IMG_7807 (polvo entrando a la mezcladora).\nFAB_E4_IMG_7806.",
+          "Texto: \"1.500 mg MELENA DE LEÓN\" sobre la mezcladora."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Cada tarro se llena y se pesa uno por uno, para que te llegue exacto.",
+          "Voz en off",
+          "FAB_E4_IMG_7826 (polvo cayendo al tarro).\nFAB_E4_IMG_7822 (tarro en la báscula).\nFAB_E4_IMG_7830.",
+          "Toma estrella: el polvo cayendo al tarro. Cortes rápidos al ritmo de la música."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Y antes de salir, lo revisan en el laboratorio. Tiene registro INVIMA.",
+          "Voz en off",
+          "FAB_E4_IMG_7786 (Focus Booster disolviéndose en agua).\nFAB_E4_IMG_7766.",
+          "Texto: \"REGISTRO INVIMA ✓\"."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Estos tarros y sachets salen para toda Colombia. Ya ha llegado a más de 17.000 personas.",
+          "Voz en off",
+          "IMG_3515 (tarros en el estante).\nIMG_3516.\nFAB_E4_IMG_7837.",
+          "Texto: \"+17.000 PERSONAS\"."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "CTA",
+          "Si te cuesta concentrarte y no quieres el acelere del tinto, ya sabes de dónde sale. Pídelo aquí abajo.",
+          "Voz en off",
+          "IMG_3521 (bajando un tarro del estante) → CONS_E1_IMG_6235.",
+          "Packshot del tarro + logo Bioboosters + flecha al botón."
+        ],
+        "broll": true
+      }
+    ]
+  },
+  "109": {
+    "title": "REEL 109 — Isabella Sepúlveda",
+    "sub": "TOF · Pantalla verde · \"Creo que soy adicta al tinto\"",
+    "cols": [
+      "Estructura",
+      "Texto",
+      "Formato",
+      "Audiovisual",
+      "Edición"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "Hook",
+          "Creo que soy adicta al tinto.",
+          "Pantalla verde",
+          "Creadora en la esquina inferior.\nFondo: NEG_E2_IMG_7306 (tomando de la taza, cansada).",
+          "Texto: \"SI NO ARRANCAS SIN TU TINTO ☕\"."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Me tomaba como tres antes del mediodía, hasta que me di cuenta de que me tenían acelerada y a las tres de la tarde no daba más.",
+          "Pantalla verde",
+          "Creadora en la esquina.\nFondo: NEG_E2_IMG_7672 · NEG_E2_IMG_7310.",
+          "Subtítulos completos."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Buscando algo para cambiarlo, me encontré Focus Booster, la bebida que salió en Shark Tank.",
+          "Pantalla verde",
+          "Creadora en la esquina.\nFondo: shark_tank (Drive) (del 0:17 al 0:32, Valentina presentando Focus Booster) → PROD_E6_IMG_1717.",
+          "En \"Shark Tank\" entra el clip del programa de fondo."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Solo tiene 15 miligramos de cafeína, mucho menos que un café, así que arranco sin el acelere.",
+          "Pantalla verde",
+          "Creadora en la esquina.\nFondo: PPOV_E2_IMG_8189 · PPOV_E0_IMG_3245.",
+          "Texto: \"15 mg DE CAFEÍNA vs. UN TINTO ☕\"."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Y trae 1.500 miligramos de melena de león, un hongo que ayuda a mantener el enfoque.",
+          "Pantalla verde",
+          "Creadora en la esquina.\nFondo: POS_E2_IMG_7326 (trabajando enfocada).",
+          "Texto: \"1.500 mg MELENA DE LEÓN 🍄\"."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Hasta le hicieron un estudio piloto con 10 personas, y una dijo esto: \"dejé de sentir esa necesidad de tomar café, ¡y amo el café!\"",
+          "Pantalla verde",
+          "Creadora en la esquina.\nFondo: pantallazo del testimonio de Milena en la página del estudio.",
+          "La cita resaltada en amarillo. Toma estrella."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Además sabe rico, el mío es sandía-limón.",
+          "Pantalla verde",
+          "Creadora en la esquina.\nFondo: PROD_E2_IMG_7366 (vaso rosado en la mano).",
+          "—"
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "CTA",
+          "Tienes que probarlo ya. Te lo dejo aquí abajo.",
+          "A cámara con tomas de apoyo",
+          "Creadora a cámara.\nApoyos: CONS_E1_IMG_6235",
+          "Packshot + flecha al botón."
+        ],
+        "broll": true
+      }
+    ]
+  },
+  "110": {
+    "title": "REEL 110 — Isabella Sepúlveda",
+    "sub": "MOF · Respondiendo comentario · \"Está muy caro\"",
+    "cols": [
+      "Estructura",
+      "Texto",
+      "Formato",
+      "Audiovisual",
+      "Edición"
+    ],
+    "rows": [
+      {
+        "cells": [
+          "Hook",
+          "Está muy caro.",
+          "Respondiendo comentario",
+          "Apoyo: PPOV_E2_IMG_7360 (batiendo la bebida rosada junto al tarro).",
+          "Burbuja de comentario arriba: \"Responder a @…: ¿192 mil por un tarro? muy caro 😩\".\nTexto: \"ESTÁ MUY CARO\"."
+        ],
+        "broll": false
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Te entiendo. Pero ya te estás gastando la plata en tintos y energizantes que te aceleran, y a las tres de la tarde te dejan peor.",
+          "A cámara con tomas de apoyo",
+          "Creadora a cámara.\nApoyos: NEG_E2_IMG_7306 · NEG_E2_IMG_7673",
+          "Subtítulos completos en todo el video."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "¿Y si mejor te gastas eso en algo pensado para concentrarte?",
+          "Voz en off",
+          "Apoyo: CONS_E1_IMG_6237.",
+          "—"
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Focus Booster no es café. Trae 1.500 miligramos de melena de león, magnesio, omega 3 y vitaminas B, y solo 15 miligramos de cafeína.",
+          "Voz en off",
+          "Apoyos: PROD_E1_IMG_6147 · PPOV_E2_IMG_8190.",
+          "Texto por ingrediente, uno por golpe."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Tiene registro INVIMA, le hicieron un estudio piloto con 10 personas, y lo formuló una ingeniera química, no un influencer.",
+          "Voz en off",
+          "Fábrica: FAB_E4_IMG_7825.\nLaboratorio: FAB_E4_IMG_7786.",
+          "Pantallazo flotante de la página del estudio. Texto: \"REGISTRO INVIMA ✓\" · \"ESTUDIO PILOTO · 10 PERSONAS\"."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "La melena de león ayuda a sostener el enfoque, sin el bajón de las tres y sin azúcar añadida.",
+          "Voz en off",
+          "Apoyos: POS_E2_IMG_8168 · POS_E2_IMG_8193.",
+          "Tachado: ~~bajón de las 3~~."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "Desarrollo",
+          "Y sí: cada porción sale en $6.430. Si te suscribes, te sale 15% más barato con envío gratis, y tiene 7 días de garantía.",
+          "Voz en off",
+          "Apoyo: PCAM_E6_IMG_1722 (creadora con el tarro y el vaso).",
+          "Texto: \"$6.430 POR PORCIÓN\" · \"SUSCRIPCIÓN −15% + ENVÍO GRATIS\" · \"7 DÍAS DE GARANTÍA ✓\". Toma estrella: el precio por porción."
+        ],
+        "broll": true
+      },
+      {
+        "cells": [
+          "CTA",
+          "Entonces, ¿te alcanza? La mejor pregunta es si te alcanza para seguirte tomando lo que no te funciona. Pruébalo, te lo dejo aquí abajo.",
+          "A cámara con tomas de apoyo",
+          "Creadora a cámara.\nApoyos: SHOW_E6_IMG_1733",
+          "Packshot + logo Bioboosters + flecha al botón."
+        ],
+        "broll": true
+      }
+    ]
+  }
+};
+
+  function fmtClass(fmt) {
+    const f = (fmt || '').toLowerCase();
+    if (/verde|croma/.test(f)) return 'verde';
+    if (f.includes('podcast')) return 'podcast';
+    if (/voz|off|apoyo|b-?roll|demo/.test(f)) return 'voz';
+    return '';
+  }
+
+  function openGuion(reelNum) {
+    const data = GUIONES[reelNum];
+    if (!data) return;
+    document.getElementById('modalTitle').textContent = data.title;
+    document.getElementById('modalSub').textContent = data.sub;
+    const cols = data.cols || ['Estructura', 'Texto', 'Formato', 'Audiovisual', 'Edición'];
+    const head = cols.map(c => `<th>${c}</th>`).join('');
+    const fmtCol = cols.findIndex(c => String(c).trim().toLowerCase().startsWith('formato'));
+    const rows = data.rows.map(r => {
+      const cells = Array.isArray(r) ? r : r.cells;
+      const broll = Array.isArray(r) ? false : !!r.broll;
+      const tds = cells.map((cell, i) => {
+        // data-col alimenta el rótulo de cada campo cuando la tabla colapsa a fichas en móvil.
+        const col = ` data-col="${String(cols[i] || '').replace(/"/g, '&quot;')}"`;
+        const v = (cell || '').trim();   // celdas con solo "\n" deben quedar vacías (se ocultan en móvil)
+        if (i === 0 && fmtCol !== 0) return `<td class="g-est"${col}>${v}</td>`;
+        if (i === 1 && fmtCol !== 1) return `<td class="g-texto"${col}>${v}</td>`;
+        if (i === fmtCol) return `<td${col}>${v ? `<span class="guion-fmt ${fmtClass(v)}">${v}</span>` : ''}</td>`;
+        return `<td${col}>${v}</td>`;
+      }).join('');
+      return `<tr class="${broll ? 'is-broll' : ''}">${tds}</tr>`;
+    }).join('');
+    document.getElementById('modalBody').innerHTML =
+      `<div class="guion-hint"><span>⇄</span>Desliza la tabla de lado para ver todas las columnas</div>` +
+      `<div class="guion-table-wrap"><table class="guion-table">` +
+      `<thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>` +
+      `<div class="guion-legend"><span class="swatch"></span>Filas resaltadas = tienen tomas de apoyo (b-roll) y son las que alimentan el checklist. El resto va hablado a cámara.</div>`;
+    document.getElementById('guionModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGuion(event) {
+    document.getElementById('guionModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeGuion();
+  });
+</script>
+</body>
+</html>
